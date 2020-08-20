@@ -12,10 +12,17 @@ model04
 model05
 model06 -> model.py
 app06 -> app.py
-[deploy01, heroku-flask]
+--- heroku ---
+[deploy01]
 --- fastAPI ---
 app07 -> app.py
-[deploy02, heroku-fastAPI 1]
+[deploy02]
 model07+eda
 model07 -> model.py
-[deploy03, heroku-fastAPI 2]
+[deploy03]
+model08+eda
+model08 -> model.py
+app08 -> app.py
+post_request.py
+--- dokku ---
+[deploy04]

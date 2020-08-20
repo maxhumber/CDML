@@ -2,60 +2,15 @@
 
 #### Deploy: Dokku
 
-**On Laptop**
 
-0. Build the damn flask app... the bottom of it should look like:
 
-```
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=port)
-```
-
-1. Setup a damn environment (if you don't have one already):
+Change the Procfile
 
 ```
-python -m venv .venv
+echo "web: uvicorn app:app --host=0.0.0.0 --port=80 --workers=2" > Procfile
 ```
 
-2. Activate it:
-
-```
-source .venv/bin/activate
-```
-
-3. Install and freeze what you need:
-
-```
-pip install gunicorn flask
-pip freeze > requirements.txt
-```
-
-4. Make sure it still works locally:
-
-```
-python app.py
-```
-
-5. Specify a python `runtime.txt`:
-
-```
-python --version
-echo "python-3.7.6" >> runtime.txt
-```
-
-6. Deactivate your venv (Optional):
-
-```
-deactivate
-```
-
-7. Create a `Procfile`:
-
-```
-echo "web: gunicorn app:app --workers=4" >> Procfile
-```
-
-8. Push everything up to GitHub:
+Push everything up to GitHub:
 
 ```
 git add .
@@ -116,11 +71,11 @@ sudo ufw allow 5000
 16. Install dokku:
 
 ```
-wget https://raw.githubusercontent.com/dokku/dokku/v0.20.4/bootstrap.sh
-sudo DOKKU_TAG=v0.20.4 bash bootstrap.sh
+wget https://raw.githubusercontent.com/dokku/dokku/v0.21.4/bootstrap.sh
+sudo DOKKU_TAG=v0.21.4 bash bootstrap.sh
 ```
 
-17. Navigate to the machine IP address in a browser and add your ssh key
+17. Navigate to the machine IP address of the server in a browser and add your ssh key
 
 ```
 # to copy and paste:
@@ -134,13 +89,13 @@ cat .ssh/id_rsa.pub
 19. Create a dokku app:
 
 ```
-dokku apps:create ffninja
+dokku apps:create powerapp
 ```
 
 20. Enable VHOST:
 
 ```
-dokku domains:enable ffninja
+dokku domains:enable powerapp
 ```
 
 
@@ -150,7 +105,7 @@ dokku domains:enable ffninja
 21. Add dokku as a remote:
 
 ```
-git remote add dokku dokku@165.XXX.43.118:ffninja
+git remote add dokku dokku@165.XXX.43.118:powerapp
 ```
 
 22. Verify that the remote got added:
