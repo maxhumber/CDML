@@ -25,7 +25,7 @@ def index(json_data: Dict):
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
-    uvicorn.run(app)
+    uvicorn.run(app, port=port)
 
 # run at command line with:
 # uvicorn app:app --port 5000 --reload
