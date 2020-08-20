@@ -5,6 +5,7 @@ from fastapi import FastAPI
 import pandas as pd
 import pickle
 from typing import Dict
+import os
 
 from utils import DateEncoder
 
@@ -23,6 +24,7 @@ def index(json_data: Dict):
     return {'mw_prediction': prediction}
 
 if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 5000))
     uvicorn.run(app)
 
 # run at command line with:
