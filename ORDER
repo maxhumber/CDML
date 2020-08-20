@@ -1,0 +1,15 @@
+[setup]
+model01
+[flask]
+app01
+app02
+app03
+app04
+app05
+model02
+model03
+model04
+model05
+model06 -> model.py
+app06 -> app.py
+[heroku]

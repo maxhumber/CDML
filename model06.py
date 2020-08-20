@@ -1,3 +1,5 @@
+# complete data frame mapper
+
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
@@ -25,8 +27,15 @@ pipe = make_pipeline(mapper, model)
 pipe.fit(X_train, y_train)
 round(mean_squared_error(y_test, pipe.predict(X_test)) ** (1/2))
 
+# try and predict
+
 new = pd.DataFrame({'temperature': [21]})
 pipe.predict(new)[0]
 
 with open('pipe.pkl', 'wb') as f:
     pickle.dump(pipe, f)
+
+with open('pipe.pkl', 'rb') as f:
+    pipe = pickle.load(f)
+
+pipe.predict(new)[0]

@@ -1,3 +1,5 @@
+# complete data frame mapper
+
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
@@ -5,7 +7,6 @@ from sklearn.metrics import mean_squared_error
 import pickle
 from sklearn.impute import SimpleImputer
 from sklearn_pandas import DataFrameMapper
-from sklearn.pipeline import make_pipeline
 
 df = pd.read_csv('data/weather_power.csv')
 
@@ -19,14 +20,25 @@ mapper = DataFrameMapper([
     (['temperature'], SimpleImputer())
 ], df_out=True)
 
+Z_train = mapper.fit_transform(X_train)
+Z_test = mapper.transform(X_test)
+
 model = LinearRegression()
+model.fit(Z_train, y_train)
+round(mean_squared_error(y_test, model.predict(Z_test)) ** (1/2))
 
-pipe = make_pipeline(mapper, model)
-pipe.fit(X_train, y_train)
-round(mean_squared_error(y_test, pipe.predict(X_test)) ** (1/2))
+# try and predict
 
+X_train.sample(1).to_dict(orient='list')
 new = pd.DataFrame({'temperature': [21]})
-pipe.predict(new)[0]
 
-with open('pipe.pkl', 'wb') as f:
-    pickle.dump(pipe, f)
+Z_new = mapper.transform(new)
+model.predict(Z_new)[0]
+
+with open('model.pkl', 'wb') as f:
+    pickle.dump(model, f)
+
+with open('model.pkl', 'rb') as f:
+    model = pickle.load(f)
+
+model.predict(Z_new)[0]
