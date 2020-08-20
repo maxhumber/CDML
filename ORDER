@@ -1,6 +1,6 @@
 [setup]
 model01
-(flask)
+--- flask ---
 app01
 app02
 app03
@@ -12,8 +12,9 @@ model04
 model05
 model06 -> model.py
 app06 -> app.py
-[heroku]
+[heroku-flask]
 {deploy}
-(fastAPI)
+--- fastAPI ---
 app07 -> app.py
+[heroku-fastAPI]
 {deploy}
