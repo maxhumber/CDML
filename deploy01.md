@@ -96,3 +96,9 @@ git push heroku master
 ```
 
 15. Click on the url and make sure it works!
+
+16. (If something is wrong):
+
+```
+heroku logs -t 
+```

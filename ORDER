@@ -12,9 +12,10 @@ model04
 model05
 model06 -> model.py
 app06 -> app.py
-[heroku-flask]
-{deploy}
+[deploy01, heroku-flask]
 --- fastAPI ---
 app07 -> app.py
-[heroku-fastAPI]
-{deploy}
+[deploy02, heroku-fastAPI 1]
+model07+eda
+model07 -> model.py
+[deploy03, heroku-fastAPI 2]

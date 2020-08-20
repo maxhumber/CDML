@@ -50,7 +50,7 @@ echo "python-3.7.9" > runtime.txt
    **NEW**
 
 ```
-echo "web: uvicorn app:app --workers=2" > Procfile
+echo "web: uvicorn app:app --host=0.0.0.0 --port=${PORT:-5000} --workers=2" > Procfile
 ```
 
 8. Test the app locally:
