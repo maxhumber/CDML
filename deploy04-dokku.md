@@ -1,5 +1,3 @@
-![dokku](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.rodSWxgGl1-tlKWYKucBEQAAAA%26pid%3DApi&f=1)
-
 #### Deploy: Dokku
 
 
@@ -62,13 +60,7 @@ sudo ufw allow http
 sudo ufw allow https
 ```
 
-15. Poke another hole in 5000 (`sudo ufw allow PORT`):
-
-```
-sudo ufw allow 5000
-```
-
-16. Install dokku:
+Install dokku:
 
 ```
 wget https://raw.githubusercontent.com/dokku/dokku/v0.21.4/bootstrap.sh
