@@ -1,9 +1,4 @@
 
-[deploy03]
-model08+eda
-model08 -> model.py
-app08 -> app.py
-post_request.py
 --- dokku ---
 [deploy04]
 post_request02.py

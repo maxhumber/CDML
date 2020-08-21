@@ -9,15 +9,18 @@ from sklearn.impute import SimpleImputer
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import PolynomialFeatures
 
-df = pd.read_csv('data/weather_power.csv')
+from utils import DateEncoder # CUSTOM IMPORT
+
+df = pd.read_csv('data/weather_power.csv', parse_dates=[0])
 
 target = 'energy_demand'
 y = df[target]
-X = df[['temperature']]
+X = df[['date', 'temperature']]
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1, shuffle=False)
 
 mapper = DataFrameMapper([
+    ('date', DateEncoder(), {'input_df': True}),
     (['temperature'], [SimpleImputer(), PolynomialFeatures(degree=2, include_bias=False)])
 ], df_out=True)
 
