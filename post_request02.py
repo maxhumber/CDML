@@ -17,7 +17,7 @@ def post(url, data):
 
 data = {
     "date": str(pd.Timestamp('now')),
-    "temperature": -30
+    "temperature": 20
 }
 
 post("http://127.0.0.1:5000", data)

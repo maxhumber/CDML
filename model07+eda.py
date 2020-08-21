@@ -20,7 +20,7 @@ plt.scatter(df['temperature'], df['toronto_demand_mw'], alpha=1/20)
 plt.plot(df['date'], df['toronto_demand_mw'])
 plt.plot(df['date'], df['temperature'])
 
-target = 'toronto_demand_mw'
+target = 'energy_demand'
 y = df[target]
 X = df[['temperature']]
 

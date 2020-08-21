@@ -15,7 +15,7 @@ from matplotlib import pyplot as plt
 
 df = pd.read_csv('data/weather_power.csv', parse_dates=[0])
 
-target = 'toronto_demand_mw'
+target = 'energy_demand'
 y = df[target]
 X = df[['date', 'temperature']]
 

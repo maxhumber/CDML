@@ -1,4 +1,4 @@
-[setup]
+[environment]
 model01
 --- flask ---
 app01
@@ -26,3 +26,9 @@ app08 -> app.py
 post_request.py
 --- dokku ---
 [deploy04]
+post_request02.py
+model09
+model10
+app09
+app10
+[deploy05]

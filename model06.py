@@ -1,4 +1,4 @@
-# complete data frame mapper
+# add pipeline
 
 import pandas as pd
 from sklearn.model_selection import train_test_split
@@ -11,7 +11,7 @@ from sklearn.pipeline import make_pipeline
 
 df = pd.read_csv('data/weather_power.csv')
 
-target = 'toronto_demand_mw'
+target = 'energy_demand'
 y = df[target]
 X = df[['temperature']]
 

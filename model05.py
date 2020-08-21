@@ -1,4 +1,4 @@
-# complete data frame mapper
+# can pickle, but it would be both?
 
 import pandas as pd
 from sklearn.model_selection import train_test_split
@@ -10,7 +10,7 @@ from sklearn_pandas import DataFrameMapper
 
 df = pd.read_csv('data/weather_power.csv')
 
-target = 'toronto_demand_mw'
+target = 'energy_demand'
 y = df[target]
 X = df[['temperature']]
 

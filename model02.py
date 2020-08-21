@@ -8,14 +8,14 @@ import pickle
 
 df = pd.read_csv('data/weather_power.csv')
 
-target = 'toronto_demand_mw'
+target = 'energy_demand'
 y = df[target]
 X = df[['temperature']]
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1, shuffle=False)
 
+# will break
+
 model = LinearRegression()
 model.fit(X_train, y_train)
 round(mean_squared_error(y_test, model.predict(X_test)) ** (1/2))
-
-# will break

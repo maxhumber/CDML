@@ -1,4 +1,4 @@
-### Deploy Heroku
+### Deploy Flask to Heroku
 
 1. Setup a virtual environment:
 

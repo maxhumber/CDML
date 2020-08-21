@@ -1,3 +1,5 @@
+# dummy example, get to a model as soon as possible
+
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.dummy import DummyRegressor
@@ -6,7 +8,7 @@ import pickle
 
 df = pd.read_csv('data/weather_power.csv')
 
-target = 'toronto_demand_mw'
+target = 'energy_demand'
 y = df[target]
 X = df[['temperature']]
 
