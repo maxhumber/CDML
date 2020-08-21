@@ -1,25 +1,24 @@
 
 import pickle
-from flask import Flask, request
 import pandas as pd
 
-app = Flask(__name__)
+import uvicorn
+from fastapi import FastAPI
 
-with open('model.pkl', 'rb') as f:
-    model = pickle.load(f)
+app = FastAPI()
 
-@app.route('/')
+with open('pipe.pkl', 'rb') as f:
+    pipe = pickle.load(f)
+
+@app.get('/')
 def index():
-    return 'Use the /predict endpoint'
+    return 'Use the /predict endpoint with a temperature argument'
 
-@app.route('/predict')
-def predict():
-    query = request.args
-    temperature = float(query.get('temperature'))
-    print(temperature)
+@app.get('/predict')
+def predict(temperature: float):
     new = pd.DataFrame({'temperature': [temperature]})
-    prediction = model.predict(new)[0]
+    prediction = pipe.predict(new)[0]
     return {'prediction': prediction}
 
 if __name__ == '__main__':
-    app.run(port=5000, debug=True)
+    uvicorn.run(app)
