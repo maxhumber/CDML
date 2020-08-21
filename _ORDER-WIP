@@ -1,7 +1,4 @@
 
---- dokku ---
-[deploy04]
-post_request02.py
 model09
 model10
 app09
