@@ -3,13 +3,17 @@ import pickle
 import pandas as pd
 from sklearn_pandas import DataFrameMapper
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error
 from sklearn.impute import SimpleImputer
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import PolynomialFeatures
+from sklearn.feature_selection import SelectKBest
+import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Input
+from tensorflow.keras.wrappers.scikit_learn import KerasRegressor
+from tensorflow.keras.models import load_model
 
-from utils import DateEncoder # CUSTOM MODULE IMPORT
+from utils import DateEncoder, nn
 
 df = pd.read_csv('data/weather_power.csv', parse_dates=[0])
 
@@ -24,9 +28,16 @@ mapper = DataFrameMapper([
     (['temperature'], [SimpleImputer(), PolynomialFeatures(degree=2, include_bias=False)])
 ], df_out=True)
 
-model = LinearRegression()
-pipe = make_pipeline(mapper, model)
+columns = 5
+select = SelectKBest(k=columns)
+
+model = KerasRegressor(nn, epochs=100, batch_size=32, verbose=0)
+
+pipe = make_pipeline(mapper, select, model)
 pipe.fit(X_train, y_train)
+
+pipe.named_steps['kerasregressor'].model.save('model.h5')
+pipe.named_steps['kerasregressor'].model = None
 
 with open('pipe.pkl', 'wb') as f:
     pickle.dump(pipe, f)
