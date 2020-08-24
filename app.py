@@ -3,21 +3,29 @@ import os
 from typing import Dict
 import pandas as pd
 from fastapi import FastAPI
+from pydantic import BaseModel
 import uvicorn
-from utils import DateEncoder
+from utils import DateEncoder, nn
+from tensorflow.keras.models import load_model
 
 app = FastAPI()
 
 with open("pipe.pkl", 'rb') as f:
     pipe = pickle.load(f)
 
+pipe.named_steps['kerasregressor'].model = load_model('model.h5')
+
+class RequestData(BaseModel):
+    date: str
+    temperature: float
+
 @app.post("/")
-def index(json_data: Dict):
+async def index(request: RequestData):
     new = pd.DataFrame({
-        'date': [pd.Timestamp(json_data.get('date'))],
-        'temperature': [float(json_data.get('temperature'))]
+        'date': [pd.Timestamp(request.date)],
+        'temperature': [request.temperature]
     })
-    prediction = pipe.predict(new)[0]
+    prediction = float(pipe.predict(new))
     return {'prediction': prediction}
 
 if __name__ == "__main__":
