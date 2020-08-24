@@ -6,6 +6,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
 from sklearn.impute import SimpleImputer
 from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import PolynomialFeatures
 
 df = pd.read_csv("data/weather_power.csv")
 
@@ -17,7 +18,7 @@ X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.1, shuffle=False, random_state=42)
 
 mapper = DataFrameMapper([
-    (['temperature'], SimpleImputer()),
+    (['temperature'], [SimpleImputer(), PolynomialFeatures(degree=2, include_bias=False)]),
 ], df_out=True)
 
 model = LinearRegression()
